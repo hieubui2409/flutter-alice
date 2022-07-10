@@ -6,6 +6,7 @@ class AliceConstants {
   static Color green = Color(0xff05c46b);
   static Color grey = Color(0xff808e9b);
   static Color orange = Color(0xffffa801);
+  static Color primary = Color(0xff8D7EF7);
   static MaterialColor primarySwatch = MaterialColor(
     const Color(0xff8D7EF7).value,
     const {

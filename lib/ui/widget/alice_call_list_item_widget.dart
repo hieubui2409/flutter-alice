@@ -3,6 +3,7 @@ import 'package:flutter_alice/helper/alice_conversion_helper.dart';
 import 'package:flutter_alice/model/alice_http_call.dart';
 import 'package:flutter_alice/model/alice_http_response.dart';
 import 'package:flutter_alice/ui/utils/alice_constants.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class AliceCallListItemWidget extends StatelessWidget {
   final AliceHttpCall call;
@@ -24,13 +25,7 @@ class AliceCallListItemWidget extends StatelessWidget {
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildMethodAndEndpointRow(context),
-                      const SizedBox(height: 4),
-                      _buildServerRow(),
-                      const SizedBox(height: 4),
-                      _buildStatsRow()
-                    ],
+                    children: [_buildMethodAndEndpointRow(context), const SizedBox(height: 4), _buildServerRow(), const SizedBox(height: 4), _buildStatsRow()],
                   ),
                 ),
                 _buildResponseColumn(context)
@@ -48,12 +43,19 @@ class AliceCallListItemWidget extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Text(
-          call.method,
-          style: TextStyle(fontSize: 16, color: textColor),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        MarkdownBody(
+          data: call.method,
+          softLineBreak: false,
+          styleSheet: MarkdownStyleSheet(
+            code: TextStyle(fontSize: 16, color: textColor),
+          ),
         ),
+        // Text(
+        //   call.method,
+        //   style: TextStyle(fontSize: 16, color: textColor),
+        //   maxLines: 1,
+        //   overflow: TextOverflow.ellipsis,
+        // ),
         Padding(padding: EdgeInsets.only(left: 10)),
         Expanded(
           child: Text(
@@ -88,14 +90,8 @@ class AliceCallListItemWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Flexible(
-            flex: 1,
-            child: Text(_formatTime(call.request!.time),
-                style: TextStyle(fontSize: 12))),
-        Flexible(
-            flex: 1,
-            child: Text("${AliceConversionHelper.formatTime(call.duration)}",
-                style: TextStyle(fontSize: 12))),
+        Flexible(flex: 1, child: Text(_formatTime(call.request!.time), style: TextStyle(fontSize: 12))),
+        Flexible(flex: 1, child: Text("${AliceConversionHelper.formatTime(call.duration)}", style: TextStyle(fontSize: 12))),
         Flexible(
           flex: 1,
           child: Text(
