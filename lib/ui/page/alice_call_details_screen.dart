@@ -19,8 +19,7 @@ class AliceCallDetailsScreen extends StatefulWidget {
   _AliceCallDetailsScreenState createState() => _AliceCallDetailsScreenState();
 }
 
-class _AliceCallDetailsScreenState extends State<AliceCallDetailsScreen>
-    with SingleTickerProviderStateMixin {
+class _AliceCallDetailsScreenState extends State<AliceCallDetailsScreen> with SingleTickerProviderStateMixin {
   AliceHttpCall get call => widget.call;
 
   @override
@@ -33,16 +32,14 @@ class _AliceCallDetailsScreenState extends State<AliceCallDetailsScreen>
     return Theme(
       data: ThemeData(
         brightness: widget.core.brightness,
-        primarySwatch: Colors.green,
+        primarySwatch: AliceConstants.primarySwatch,
       ),
       child: StreamBuilder<List<AliceHttpCall>>(
         stream: widget.core.callsSubject,
         initialData: [widget.call],
         builder: (context, callsSnapshot) {
           if (callsSnapshot.hasData) {
-            AliceHttpCall? call = callsSnapshot.data?.firstWhere(
-                (snapshotCall) => snapshotCall.id == widget.call.id,
-                orElse: null);
+            AliceHttpCall? call = callsSnapshot.data?.firstWhere((snapshotCall) => snapshotCall.id == widget.call.id, orElse: null);
             if (call != null) {
               return _buildMainWidget();
             } else {
@@ -64,8 +61,7 @@ class _AliceCallDetailsScreenState extends State<AliceCallDetailsScreen>
           backgroundColor: AliceConstants.lightRed,
           key: Key('share_key'),
           onPressed: () async {
-            Share.share(await _getSharableResponseString(),
-                subject: 'Request Details');
+            Share.share(await _getSharableResponseString(), subject: 'Request Details');
           },
           child: Icon(Icons.share),
         ),

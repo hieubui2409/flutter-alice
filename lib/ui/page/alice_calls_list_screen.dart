@@ -21,8 +21,7 @@ class AliceCallsListScreen extends StatefulWidget {
 class _AliceCallsListScreenState extends State<AliceCallsListScreen> {
   AliceCore get aliceCore => widget._aliceCore;
   bool _searchEnabled = false;
-  final TextEditingController _queryTextEditingController =
-      TextEditingController();
+  final TextEditingController _queryTextEditingController = TextEditingController();
   List<AliceMenuItem> _menuItems = [];
 
   _AliceCallsListScreenState() {
@@ -36,7 +35,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen> {
     return Theme(
       data: ThemeData(
         brightness: widget._aliceCore.brightness,
-        primarySwatch: Colors.green,
+        primarySwatch: AliceConstants.primarySwatch,
       ),
       child: Scaffold(
         appBar: AppBar(
@@ -133,10 +132,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen> {
         List<AliceHttpCall> calls = snapshot.data ?? [];
         String query = _queryTextEditingController.text.trim();
         if (query.isNotEmpty) {
-          calls = calls
-              .where((call) =>
-                  call.endpoint.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+          calls = calls.where((call) => call.endpoint.toLowerCase().contains(query.toLowerCase())).toList();
         }
         if (calls.isNotEmpty) {
           return _buildCallsListWidget(calls);
