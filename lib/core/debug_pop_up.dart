@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_alice/model/alice_http_call.dart';
 import 'package:flutter_alice/ui/page/alice_stats_screen.dart';
@@ -81,11 +82,11 @@ class _DebugPopUpState extends State<DebugPopUp> {
             initialData: [],
             stream: stream,
             builder: (_, sns) {
-              final counter = min(sns.data?.length ?? 0, 99);
-              return Text("$counter");
+              final counter = min(sns.data?.length ?? 0, 999);
+              return AutoSizeText("$counter");
             },
           ),
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xff8D7EF7),
           foregroundColor: Colors.white,
           onPressed: onClicked,
           mini: true,
