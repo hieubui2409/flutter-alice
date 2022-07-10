@@ -19,7 +19,7 @@ class AliceStatsScreen extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Alice - HTTP Inspector - Stats"),
+          title: Text("${AliceConstants.inspectorName} - Stats"),
         ),
         body: Container(
           padding: const EdgeInsets.all(8),

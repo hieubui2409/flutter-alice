@@ -96,7 +96,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen> {
   }
 
   Widget _buildTitleWidget() {
-    return Text("FA Master Inspector");
+    return Text(AliceConstants.inspectorName);
   }
 
   Widget _buildSearchField() {

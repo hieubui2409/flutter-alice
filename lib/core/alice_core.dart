@@ -10,6 +10,8 @@ import 'package:flutter_alice/ui/page/alice_calls_list_screen.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../ui/utils/alice_constants.dart';
+
 class AliceCore {
   /// Should user be notified with notification if there's new request catched
   /// by Alice
@@ -23,8 +25,7 @@ class AliceCore {
   final bool darkTheme;
 
   /// Rx subject which contains all intercepted http calls
-  final BehaviorSubject<List<AliceHttpCall>> callsSubject =
-      BehaviorSubject.seeded([]);
+  final BehaviorSubject<List<AliceHttpCall>> callsSubject = BehaviorSubject.seeded([]);
 
   /// Icon url for notification
   final String notificationIcon;
@@ -83,8 +84,7 @@ class AliceCore {
   void _onCallsChanged() async {
     if (callsSubject.value.length > 0) {
       _notificationMessage = _getNotificationMessage();
-      if (_notificationMessage != _notificationMessageShown &&
-          !_notificationProcessing) {
+      if (_notificationMessage != _notificationMessageShown && !_notificationProcessing) {
         await _showLocalNotification();
         _onCallsChanged();
       }
@@ -101,8 +101,7 @@ class AliceCore {
   void navigateToCallListScreen() {
     var context = getContext();
     if (context == null) {
-      print(
-          "Cant start Alice HTTP Inspector. Please add NavigatorKey to your application");
+      print("Cant start ${AliceConstants.inspectorName}. Please add NavigatorKey to your application");
       return;
     }
     if (!_isInspectorOpened) {
@@ -121,29 +120,13 @@ class AliceCore {
 
   String _getNotificationMessage() {
     List<AliceHttpCall>? calls = callsSubject.value;
-    int successCalls = calls
-        .where((call) =>
-            call.response != null &&
-            (call.response?.status ?? 0) >= 200 &&
-            (call.response?.status ?? 0) < 300)
-        .toList()
-        .length;
+    int successCalls =
+        calls.where((call) => call.response != null && (call.response?.status ?? 0) >= 200 && (call.response?.status ?? 0) < 300).toList().length;
 
-    int redirectCalls = calls
-        .where((call) =>
-            call.response != null &&
-            (call.response?.status ?? 0) >= 300 &&
-            (call.response?.status ?? 0) < 400)
-        .toList()
-        .length;
+    int redirectCalls =
+        calls.where((call) => call.response != null && (call.response?.status ?? 0) >= 300 && (call.response?.status ?? 0) < 400).toList().length;
 
-    int errorCalls = calls
-        .where((call) =>
-            call.response != null &&
-            (call.response?.status ?? 0) >= 400 &&
-            (call.response?.status ?? 0) < 600)
-        .toList()
-        .length;
+    int errorCalls = calls.where((call) => call.response != null && (call.response?.status ?? 0) >= 400 && (call.response?.status ?? 0) < 600).toList().length;
 
     int loadingCalls = calls.where((call) => call.loading).toList().length;
 
@@ -203,8 +186,7 @@ class AliceCore {
     }
     selectedCall.loading = false;
     selectedCall.response = response;
-    selectedCall.duration = response.time.millisecondsSinceEpoch -
-        selectedCall.request!.time.millisecondsSinceEpoch;
+    selectedCall.duration = response.time.millisecondsSinceEpoch - selectedCall.request!.time.millisecondsSinceEpoch;
 
     callsSubject.add([...callsSubject.value]);
   }
@@ -221,8 +203,7 @@ class AliceCore {
     callsSubject.add([]);
   }
 
-  AliceHttpCall? _selectCall(int requestId) =>
-      callsSubject.value.firstWhereOrNull((call) => call.id == requestId);
+  AliceHttpCall? _selectCall(int requestId) => callsSubject.value.firstWhereOrNull((call) => call.id == requestId);
 
   bool isShowedBubble = false;
 
