@@ -11,7 +11,7 @@ import '../utils/element_builder.dart';
 abstract class AliceBaseCallDetailsWidgetState<T extends StatefulWidget> extends State<T> {
   final JsonEncoder encoder = new JsonEncoder.withIndent('  ');
 
-  Widget getListRow(String name, String value) {
+  Widget getListRow(String name, String value, {bool useMarkdown = false, String language = ''}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -19,22 +19,26 @@ abstract class AliceBaseCallDetailsWidgetState<T extends StatefulWidget> extends
         SelectableText(name, style: TextStyle(fontWeight: FontWeight.bold)),
         Padding(padding: EdgeInsets.only(left: 5)),
         Expanded(
-          child: MarkdownBody(
-            data: value.isEmpty ? '' : '```json\n$value\n```',
-            selectable: true,
-            softLineBreak: true,
-            styleSheetTheme: MarkdownStyleSheetBaseTheme.material,
-            extensionSet: md.ExtensionSet(
-              md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-              [
-                md.EmojiSyntax(),
-                ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
-              ],
-            ),
-            builders: {
-              'code': CodeElementBuilder(),
-            },
-          ),
+          child: (value.isNotEmpty && useMarkdown)
+              ? MarkdownBody(
+                  data: value.isEmpty ? '' : '```$language\n$value\n```',
+                  selectable: true,
+                  softLineBreak: true,
+                  styleSheetTheme: MarkdownStyleSheetBaseTheme.material,
+                  extensionSet: md.ExtensionSet(
+                    md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                    [
+                      md.EmojiSyntax(),
+                      ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
+                    ],
+                  ),
+                  builders: {
+                    'code': CodeElementBuilder(),
+                  },
+                )
+              : SelectableText(
+                  value,
+                ),
         ),
         Padding(
           padding: EdgeInsets.only(bottom: 18),

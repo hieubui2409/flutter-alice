@@ -30,10 +30,10 @@ class CodeElementBuilder extends MarkdownElementBuilder {
         theme: MediaQueryData.fromWindow(WidgetsBinding.instance.window).platformBrightness == Brightness.light ? atomOneLightTheme : atomOneDarkTheme,
 
         // Specify padding
-        padding: const EdgeInsets.all(8),
+        // padding: const EdgeInsets.all(8),
 
         // Specify text style
-        textStyle: GoogleFonts.robotoMono(),
+        textStyle: GoogleFonts.robotoMono(fontSize: 14),
       ),
     );
   }
