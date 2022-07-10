@@ -24,11 +24,13 @@ class _AliceCallRequestWidget extends AliceBaseCallDetailsWidgetState<AliceCallR
     rows.add(getListRow("Content type:", getContentType(_call.request!.headers)!));
 
     var body = _call.request!.body;
+    bool md = false;
     String? bodyContent = "Body is empty";
     if (body != null) {
       bodyContent = formatBody(body, getContentType(_call.request!.headers));
+      md = true;
     }
-    rows.add(getListRow("Body:", bodyContent!, useMarkdown: true, language: 'json'));
+    rows.add(getListRow("Body:", bodyContent!, useMarkdown: md, language: 'json'));
     var formDataFields = _call.request!.formDataFields;
     if (formDataFields?.isNotEmpty == true) {
       rows.add(getListRow("Form data fields: ", ""));

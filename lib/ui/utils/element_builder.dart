@@ -33,7 +33,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
         // padding: const EdgeInsets.all(8),
 
         // Specify text style
-        textStyle: GoogleFonts.robotoMono(fontSize: 14),
+        textStyle: GoogleFonts.robotoMono(fontSize: 10),
       ),
     );
   }

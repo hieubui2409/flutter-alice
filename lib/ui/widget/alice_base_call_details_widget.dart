@@ -14,7 +14,7 @@ abstract class AliceBaseCallDetailsWidgetState<T extends StatefulWidget> extends
   Widget getListRow(String name, String value, {bool useMarkdown = false, String language = ''}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SelectableText(name, style: TextStyle(fontWeight: FontWeight.bold)),
         Padding(padding: EdgeInsets.only(left: 5)),
