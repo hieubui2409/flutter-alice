@@ -18,7 +18,7 @@ abstract class AliceBaseCallDetailsWidgetState<T extends StatefulWidget> extends
         Flexible(
             fit: FlexFit.loose,
             child: MarkdownBody(
-              data: '`$value`',
+              data: value.isEmpty ? '' : '```\n$value\n```',
               selectable: true,
             )
             // SelectableText(

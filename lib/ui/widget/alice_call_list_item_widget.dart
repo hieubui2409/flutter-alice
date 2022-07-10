@@ -43,21 +43,20 @@ class AliceCallListItemWidget extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
-        MarkdownBody(
-          data: '`${call.method}`',
-          softLineBreak: false,
-          styleSheet: MarkdownStyleSheet(
-            code: TextStyle(fontSize: 16, color: textColor),
-          ),
+        Text(
+          call.method,
+          style: TextStyle(fontSize: 16, color: textColor),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         Padding(padding: EdgeInsets.only(left: 10)),
         Expanded(
-          child: MarkdownBody(
-            data: '`${call.endpoint}`',
-            softLineBreak: false,
-            styleSheet: MarkdownStyleSheet(
-              code: TextStyle(fontSize: 16, color: textColor),
-            ),
+          child: Text(
+            call.endpoint,
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+            style: TextStyle(fontSize: 16, color: textColor),
+            maxLines: 1,
           ),
         )
       ],
