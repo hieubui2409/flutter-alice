@@ -6,6 +6,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:google_fonts/google_fonts.dart';
 
+import 'custom_highlighter.dart';
+
 class CodeElementBuilder extends MarkdownElementBuilder {
   @override
   Widget? visitElementAfter(md.Element element, TextStyle? preferredStyle) {
@@ -17,7 +19,7 @@ class CodeElementBuilder extends MarkdownElementBuilder {
     }
     return SizedBox(
       width: MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width,
-      child: HighlightView(
+      child: CustomHighlighter(
         // The original code to be highlighted
         element.textContent,
 
