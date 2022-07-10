@@ -6,6 +6,8 @@ import 'package:flutter_alice/ui/utils/alice_parser.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 
+import '../utils/element_builder.dart';
+
 abstract class AliceBaseCallDetailsWidgetState<T extends StatefulWidget> extends State<T> {
   final JsonEncoder encoder = new JsonEncoder.withIndent('  ');
 
@@ -29,6 +31,9 @@ abstract class AliceBaseCallDetailsWidgetState<T extends StatefulWidget> extends
                 ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
               ],
             ),
+            builders: {
+              'code': CodeElementBuilder(),
+            },
           ),
         ),
         Padding(
