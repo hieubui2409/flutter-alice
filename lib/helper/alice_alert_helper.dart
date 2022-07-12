@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_alice/ui/utils/alice_constants.dart';
 
 class AliceAlertHelper {
   ///Helper method used to open alarm with given title and description.
@@ -16,6 +17,9 @@ class AliceAlertHelper {
     actions.add(
       ElevatedButton(
         child: Text(firstButtonTitle),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(AliceConstants.primary),
+        ),
         onPressed: () {
           if (firstButtonAction != null) {
             firstButtonAction();
@@ -28,6 +32,9 @@ class AliceAlertHelper {
       actions.add(
         ElevatedButton(
           child: Text(secondButtonTitle),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(AliceConstants.primary),
+          ),
           onPressed: () {
             if (secondButtonAction != null) {
               secondButtonAction();
