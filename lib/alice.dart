@@ -9,9 +9,11 @@ import 'package:flutter_alice/core/alice_dio_interceptor.dart';
 import 'package:flutter_alice/core/alice_http_adapter.dart';
 import 'package:flutter_alice/core/alice_http_client_adapter.dart';
 import 'package:flutter_alice/model/alice_http_call.dart';
+import 'package:flutter_highlighter/themes/atom-one-dark-reasonable.dart';
+import 'package:flutter_highlighter/themes/atom-one-light.dart';
 import 'package:http/http.dart' as http;
 
-bool dark = false;
+Map<String, TextStyle> theme = atomOneLightTheme;
 
 class Alice {
   /// Should user be notified with notification if there's new request catched
@@ -40,7 +42,9 @@ class Alice {
       this.showInspectorOnShake = false,
       this.darkTheme = false,
       this.notificationIcon = "@mipmap/ic_launcher"}) {
-    dark = this.darkTheme;
+    if (darkTheme) {
+      theme = atomOneDarkReasonableTheme;
+    }
     _navigatorKey = navigatorKey ?? GlobalKey<NavigatorState>();
     _aliceCore = AliceCore(
       _navigatorKey,
