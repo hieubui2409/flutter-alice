@@ -11,6 +11,8 @@ import 'package:flutter_alice/core/alice_http_client_adapter.dart';
 import 'package:flutter_alice/model/alice_http_call.dart';
 import 'package:http/http.dart' as http;
 
+bool dark = false;
+
 class Alice {
   /// Should user be notified with notification if there's new request catched
   /// by Alice
@@ -38,6 +40,7 @@ class Alice {
       this.showInspectorOnShake = false,
       this.darkTheme = false,
       this.notificationIcon = "@mipmap/ic_launcher"}) {
+    dark = this.darkTheme;
     _navigatorKey = navigatorKey ?? GlobalKey<NavigatorState>();
     _aliceCore = AliceCore(
       _navigatorKey,
@@ -71,9 +74,7 @@ class Alice {
   }
 
   /// Handle response from HttpClient
-  void onHttpClientResponse(
-      HttpClientResponse response, HttpClientRequest request,
-      {dynamic body}) {
+  void onHttpClientResponse(HttpClientResponse response, HttpClientRequest request, {dynamic body}) {
     _httpClientAdapter.onResponse(response, request, body: body);
   }
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_highlighter/flutter_highlighter.dart';
 import 'package:flutter_highlighter/themes/atom-one-dark.dart';
 import 'package:flutter_highlighter/themes/atom-one-light.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:markdown/markdown.dart' as md;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:markdown/markdown.dart' as md;
 
+import '../../alice.dart';
 import 'custom_highlighter.dart';
 
 class CodeElementBuilder extends MarkdownElementBuilder {
@@ -29,7 +29,8 @@ class CodeElementBuilder extends MarkdownElementBuilder {
 
         // Specify highlight theme
         // All available themes are listed in `themes` folder
-        theme: MediaQueryData.fromWindow(WidgetsBinding.instance.window).platformBrightness == Brightness.light ? atomOneLightTheme : atomOneDarkTheme,
+        // theme: MediaQueryData.fromWindow(WidgetsBinding.instance.window).platformBrightness == Brightness.light ? atomOneLightTheme : atomOneDarkTheme,
+        theme: dark ? atomOneLightTheme : atomOneDarkTheme,
 
         // Specify padding
         // padding: const EdgeInsets.all(8),
